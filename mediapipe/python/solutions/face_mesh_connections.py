@@ -47,7 +47,7 @@ Przykład użycia:
     mp_face_mesh = mp.solutions.face_mesh
     face_mesh = mp_face_mesh.FaceMesh()
     
-    # Przetwarzanie obrazu (zakładając że 'image' to numpy array RGB)
+    # Przetwarzanie obrazu (zakładając, że 'image' to numpy array RGB)
     results = face_mesh.process(image)
     
     # Rysowanie siatki twarzy na obrazie

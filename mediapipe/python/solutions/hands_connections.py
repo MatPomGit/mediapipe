@@ -41,7 +41,7 @@ Przykład użycia:
     mp_hands = mp.solutions.hands
     hands = mp_hands.Hands()
     
-    # Przetwarzanie obrazu (zakładając że 'image' to numpy array RGB)
+    # Przetwarzanie obrazu (zakładając, że 'image' to numpy array RGB)
     results = hands.process(image)
     
     # Rysowanie połączeń dłoni na obrazie

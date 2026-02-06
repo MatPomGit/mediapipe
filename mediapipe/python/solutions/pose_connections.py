@@ -38,7 +38,7 @@ Przykład użycia:
     mp_pose = mp.solutions.pose
     pose = mp_pose.Pose()
     
-    # Przetwarzanie obrazu (zakładając że 'image' to numpy array RGB)
+    # Przetwarzanie obrazu (zakładając, że 'image' to numpy array RGB)
     results = pose.process(image)
     
     # Rysowanie szkieletu pozy na obrazie

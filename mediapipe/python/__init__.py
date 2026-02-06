@@ -36,7 +36,7 @@ Przykład użycia:
   # Tworzenie pakietów
   packet = mp.packet_creator.create_string('hello')
   
-  # Przetwarzanie obrazów (zakładając że image_data to numpy array RGB)
+  # Przetwarzanie obrazów (zakładając, że image_data to numpy array RGB)
   image_data = np.zeros((480, 640, 3), dtype=np.uint8)
   image = mp.Image(image_format=mp.ImageFormat.SRGB, data=image_data)
 """
