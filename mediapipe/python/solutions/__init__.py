@@ -12,8 +12,81 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""MediaPipe Solutions Python API."""
+"""API Python MediaPipe Solutions.
 
+Ten moduł zapewnia gotowe rozwiązania do różnych zadań percepcji wizualnej
+i przetwarzania mediów. MediaPipe Solutions oferuje wysokopoziomowe API
+dla popularnych zadań uczenia maszynowego, takich jak detekcja twarzy,
+śledzenie dłoni, estymacja pozy ciała i segmentacja.
+
+Dostępne rozwiązania:
+  - face_detection: Wykrywanie twarzy na obrazach i wideo
+  - face_mesh: Detekcja siatki 468 punktów orientacyjnych twarzy
+  - hands: Śledzenie dłoni i wykrywanie gestów (21 punktów na dłoń)
+  - pose: Estymacja pozy ciała (33 punkty orientacyjne)
+  - holistic: Kompleksowe śledzenie (twarz, dłonie, poza)
+  - selfie_segmentation: Segmentacja tła portretowego
+  - objectron: Detekcja i śledzenie obiektów 3D
+
+Narzędzia pomocnicze:
+  - drawing_utils: Narzędzia do rysowania punktów orientacyjnych
+  - drawing_styles: Style wizualizacji dla różnych rozwiązań
+  - *_connections: Definicje połączeń punktów orientacyjnych
+
+Przykład użycia:
+  import mediapipe as mp
+  
+  # Inicjalizacja rozwiązania do detekcji rąk
+  mp_hands = mp.solutions.hands
+  hands = mp_hands.Hands()
+  
+  # Przetworzenie obrazu
+  results = hands.process(image)
+  
+  # Rysowanie wyników
+  mp_drawing = mp.solutions.drawing_utils
+  mp_drawing.draw_landmarks(image, results.multi_hand_landmarks, 
+                            mp_hands.HAND_CONNECTIONS)
+"""
+
+"""API Python MediaPipe Solutions.
+
+Ten moduł zapewnia gotowe rozwiązania do różnych zadań percepcji wizualnej
+i przetwarzania mediów. MediaPipe Solutions oferuje wysokopoziomowe API
+dla popularnych zadań uczenia maszynowego, takich jak detekcja twarzy,
+śledzenie dłoni, estymacja pozy ciała i segmentacja.
+
+Dostępne rozwiązania:
+  - face_detection: Wykrywanie twarzy na obrazach i wideo
+  - face_mesh: Detekcja siatki 468 punktów orientacyjnych twarzy
+  - hands: Śledzenie dłoni i wykrywanie gestów (21 punktów na dłoń)
+  - pose: Estymacja pozy ciała (33 punkty orientacyjne)
+  - holistic: Kompleksowe śledzenie (twarz, dłonie, poza)
+  - selfie_segmentation: Segmentacja tła portretowego
+  - objectron: Detekcja i śledzenie obiektów 3D
+
+Narzędzia pomocnicze:
+  - drawing_utils: Narzędzia do rysowania punktów orientacyjnych
+  - drawing_styles: Style wizualizacji dla różnych rozwiązań
+  - *_connections: Definicje połączeń punktów orientacyjnych
+
+Przykład użycia:
+  import mediapipe as mp
+  
+  # Inicjalizacja rozwiązania do detekcji rąk
+  mp_hands = mp.solutions.hands
+  hands = mp_hands.Hands()
+  
+  # Przetworzenie obrazu
+  results = hands.process(image)
+  
+  # Rysowanie wyników
+  mp_drawing = mp.solutions.drawing_utils
+  mp_drawing.draw_landmarks(image, results.multi_hand_landmarks, 
+                            mp_hands.HAND_CONNECTIONS)
+"""
+
+# Importy modułów rozwiązań MediaPipe
 import mediapipe.python.solutions.drawing_styles
 import mediapipe.python.solutions.drawing_utils
 import mediapipe.python.solutions.face_detection
