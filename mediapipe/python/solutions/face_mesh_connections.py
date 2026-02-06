@@ -11,8 +11,54 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""MediaPipe FaceMesh connections."""
+"""Połączenia punktów orientacyjnych siatki twarzy MediaPipe.
 
+Ten moduł definiuje stałe określające połączenia między punktami orientacyjnymi
+siatki twarzy (Face Mesh) używanymi przez rozwiązanie MediaPipe FaceMesh. 
+Każde połączenie jest reprezentowane jako krotka dwóch indeksów punktów 
+orientacyjnych.
+
+Połączenia są podzielone na logiczne grupy anatomiczne:
+- FACEMESH_LIPS: Kontury ust (górna i dolna warga)
+- FACEMESH_LEFT_EYE: Kontur lewego oka
+- FACEMESH_RIGHT_EYE: Kontur prawego oka
+- FACEMESH_LEFT_EYEBROW: Kontur lewej brwi
+- FACEMESH_RIGHT_EYEBROW: Kontur prawej brwi
+- FACEMESH_LEFT_IRIS: Kontur lewej tęczówki
+- FACEMESH_RIGHT_IRIS: Kontur prawej tęczówki
+- FACEMESH_FACE_OVAL: Owal twarzy (kontur zewnętrzny)
+- FACEMESH_NOSE: Kontur nosa
+- FACEMESH_CONTOURS: Wszystkie główne kontury twarzy
+- FACEMESH_IRISES: Kontury obu tęczówek
+- FACEMESH_TESSELATION: Kompletna triangulacja siatki twarzy (468 punktów)
+
+Przykład użycia:
+    from mediapipe.python.solutions import face_mesh_connections
+    import mediapipe as mp
+    
+    # Dostęp do konturów twarzy
+    contours = face_mesh_connections.FACEMESH_CONTOURS
+    
+    # Dostęp do konturów ust
+    lips = face_mesh_connections.FACEMESH_LIPS
+    
+    # Użycie z MediaPipe Face Mesh do rysowania
+    mp_drawing = mp.solutions.drawing_utils
+    mp_face_mesh = mp.solutions.face_mesh
+    face_mesh = mp_face_mesh.FaceMesh()
+    
+    # Przetwarzanie obrazu (zakładając, że 'image' to numpy array RGB)
+    results = face_mesh.process(image)
+    
+    # Rysowanie siatki twarzy na obrazie
+    if results.multi_face_landmarks:
+        for face_landmarks in results.multi_face_landmarks:
+            mp_drawing.draw_landmarks(
+                image, face_landmarks, 
+                face_mesh_connections.FACEMESH_TESSELATION)
+"""
+
+# Połączenia konturów ust (wewnętrzne i zewnętrzne: górna i dolna warga)
 FACEMESH_LIPS = frozenset([(61, 146), (146, 91), (91, 181), (181, 84), (84, 17),
                            (17, 314), (314, 405), (405, 321), (321, 375),
                            (375, 291), (61, 185), (185, 40), (40, 39), (39, 37),
@@ -24,29 +70,36 @@ FACEMESH_LIPS = frozenset([(61, 146), (146, 91), (91, 181), (181, 84), (84, 17),
                            (82, 13), (13, 312), (312, 311), (311, 310),
                            (310, 415), (415, 308)])
 
+# Połączenia konturu lewego oka
 FACEMESH_LEFT_EYE = frozenset([(263, 249), (249, 390), (390, 373), (373, 374),
                                (374, 380), (380, 381), (381, 382), (382, 362),
                                (263, 466), (466, 388), (388, 387), (387, 386),
                                (386, 385), (385, 384), (384, 398), (398, 362)])
 
+# Połączenia konturu lewej tęczówki
 FACEMESH_LEFT_IRIS = frozenset([(474, 475), (475, 476), (476, 477),
                                  (477, 474)])
 
+# Połączenia konturu lewej brwi
 FACEMESH_LEFT_EYEBROW = frozenset([(276, 283), (283, 282), (282, 295),
                                    (295, 285), (300, 293), (293, 334),
                                    (334, 296), (296, 336)])
 
+# Połączenia konturu prawego oka
 FACEMESH_RIGHT_EYE = frozenset([(33, 7), (7, 163), (163, 144), (144, 145),
                                 (145, 153), (153, 154), (154, 155), (155, 133),
                                 (33, 246), (246, 161), (161, 160), (160, 159),
                                 (159, 158), (158, 157), (157, 173), (173, 133)])
 
+# Połączenia konturu prawej brwi
 FACEMESH_RIGHT_EYEBROW = frozenset([(46, 53), (53, 52), (52, 65), (65, 55),
                                     (70, 63), (63, 105), (105, 66), (66, 107)])
 
+# Połączenia konturu prawej tęczówki
 FACEMESH_RIGHT_IRIS = frozenset([(469, 470), (470, 471), (471, 472),
                                  (472, 469)])
 
+# Połączenia konturu owalu twarzy (kontur zewnętrzny)
 FACEMESH_FACE_OVAL = frozenset([(10, 338), (338, 297), (297, 332), (332, 284),
                                 (284, 251), (251, 389), (389, 356), (356, 454),
                                 (454, 323), (323, 361), (361, 288), (288, 397),
@@ -57,6 +110,7 @@ FACEMESH_FACE_OVAL = frozenset([(10, 338), (338, 297), (297, 332), (332, 284),
                                 (234, 127), (127, 162), (162, 21), (21, 54),
                                 (54, 103), (103, 67), (67, 109), (109, 10)])
 
+# Połączenia konturu nosa
 FACEMESH_NOSE = frozenset([(168, 6), (6, 197), (197, 195), (195, 5),
                            (5, 4), (4, 1), (1, 19), (19, 94), (94, 2), (98, 97),
                            (97, 2), (2, 326), (326, 327), (327, 294),
@@ -64,13 +118,17 @@ FACEMESH_NOSE = frozenset([(168, 6), (6, 197), (197, 195), (195, 5),
                            (275, 4), (4, 45), (45, 220), (220, 115), (115, 48),
                            (48, 64), (64, 98)])
 
+# Wszystkie główne kontury twarzy (usta, oczy, brwi, owal twarzy)
 FACEMESH_CONTOURS = frozenset().union(*[
     FACEMESH_LIPS, FACEMESH_LEFT_EYE, FACEMESH_LEFT_EYEBROW, FACEMESH_RIGHT_EYE,
     FACEMESH_RIGHT_EYEBROW, FACEMESH_FACE_OVAL
 ])
 
+# Kontury obu tęczówek (lewa i prawa)
 FACEMESH_IRISES = frozenset().union(*[FACEMESH_LEFT_IRIS, FACEMESH_RIGHT_IRIS])
 
+# Kompletna triangulacja siatki twarzy - wszystkie 468 punktów orientacyjnych
+# połączone w trójkąty tworzące dokładny model 3D powierzchni twarzy
 FACEMESH_TESSELATION = frozenset([
     (127, 34),  (34, 139),  (139, 127), (11, 0),    (0, 37),    (37, 11),
     (232, 231), (231, 120), (120, 232), (72, 37),   (37, 39),   (39, 72),
