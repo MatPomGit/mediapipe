@@ -28,6 +28,7 @@ Główne komponenty:
 
 Przykład użycia:
   import mediapipe as mp
+  import numpy as np
   
   # Utworzenie grafu kalkulatorów
   graph = mp.CalculatorGraph()
@@ -35,7 +36,8 @@ Przykład użycia:
   # Tworzenie pakietów
   packet = mp.packet_creator.create_string('hello')
   
-  # Przetwarzanie obrazów
+  # Przetwarzanie obrazów (zakładając że image_data to numpy array RGB)
+  image_data = np.zeros((480, 640, 3), dtype=np.uint8)
   image = mp.Image(image_format=mp.ImageFormat.SRGB, data=image_data)
 """
 

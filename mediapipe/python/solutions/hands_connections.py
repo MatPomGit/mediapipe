@@ -28,12 +28,27 @@ Połączenia są podzielone na logiczne grupy anatomiczne:
 
 Przykład użycia:
     from mediapipe.python.solutions import hands_connections
+    import mediapipe as mp
     
     # Dostęp do wszystkich połączeń dłoni
     all_connections = hands_connections.HAND_CONNECTIONS
     
     # Dostęp do połączeń konkretnego palca
     thumb = hands_connections.HAND_THUMB_CONNECTIONS
+    
+    # Użycie z MediaPipe Hands do rysowania
+    mp_drawing = mp.solutions.drawing_utils
+    mp_hands = mp.solutions.hands
+    hands = mp_hands.Hands()
+    
+    # Przetwarzanie obrazu (zakładając że 'image' to numpy array RGB)
+    results = hands.process(image)
+    
+    # Rysowanie połączeń dłoni na obrazie
+    if results.multi_hand_landmarks:
+        for hand_landmarks in results.multi_hand_landmarks:
+            mp_drawing.draw_landmarks(
+                image, hand_landmarks, hands_connections.HAND_CONNECTIONS)
 """
 
 # Połączenia tworzące strukturę dłoni i nadgarstka

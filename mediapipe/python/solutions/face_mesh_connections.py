@@ -34,6 +34,7 @@ Połączenia są podzielone na logiczne grupy anatomiczne:
 
 Przykład użycia:
     from mediapipe.python.solutions import face_mesh_connections
+    import mediapipe as mp
     
     # Dostęp do konturów twarzy
     contours = face_mesh_connections.FACEMESH_CONTOURS
@@ -42,11 +43,19 @@ Przykład użycia:
     lips = face_mesh_connections.FACEMESH_LIPS
     
     # Użycie z MediaPipe Face Mesh do rysowania
-    import mediapipe as mp
     mp_drawing = mp.solutions.drawing_utils
-    mp_drawing.draw_landmarks(
-        image, face_landmarks, 
-        face_mesh_connections.FACEMESH_TESSELATION)
+    mp_face_mesh = mp.solutions.face_mesh
+    face_mesh = mp_face_mesh.FaceMesh()
+    
+    # Przetwarzanie obrazu (zakładając że 'image' to numpy array RGB)
+    results = face_mesh.process(image)
+    
+    # Rysowanie siatki twarzy na obrazie
+    if results.multi_face_landmarks:
+        for face_landmarks in results.multi_face_landmarks:
+            mp_drawing.draw_landmarks(
+                image, face_landmarks, 
+                face_mesh_connections.FACEMESH_TESSELATION)
 """
 
 # Połączenia konturów ust (górna i dolna warga)

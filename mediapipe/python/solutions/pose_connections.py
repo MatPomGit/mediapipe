@@ -28,15 +28,23 @@ określających szkielet pozy człowieka w 3D.
 
 Przykład użycia:
     from mediapipe.python.solutions import pose_connections
+    import mediapipe as mp
     
     # Dostęp do wszystkich połączeń pozy
     connections = pose_connections.POSE_CONNECTIONS
     
     # Użycie z MediaPipe Pose do rysowania
-    import mediapipe as mp
     mp_drawing = mp.solutions.drawing_utils
-    mp_drawing.draw_landmarks(
-        image, pose_landmarks, pose_connections.POSE_CONNECTIONS)
+    mp_pose = mp.solutions.pose
+    pose = mp_pose.Pose()
+    
+    # Przetwarzanie obrazu (zakładając że 'image' to numpy array RGB)
+    results = pose.process(image)
+    
+    # Rysowanie szkieletu pozy na obrazie
+    if results.pose_landmarks:
+        mp_drawing.draw_landmarks(
+            image, results.pose_landmarks, pose_connections.POSE_CONNECTIONS)
 """
 
 # Kompletny zestaw połączeń punktów orientacyjnych pozy ciała
