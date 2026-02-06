@@ -27,10 +27,10 @@ _GCS_URL_PREFIX = 'https://storage.googleapis.com/mediapipe-assets/'
 
 
 def download_oss_model(model_path: str):
-  """Pobiera model OSS z Google Cloud Storage, jeśli nie istnieje w pakiecie.
+  """Pobiera model OSS z Google Cloud Storage, jeżeli nie istnieje w pakiecie.
   
   Funkcja sprawdza, czy model o podanej ścieżce już istnieje lokalnie.
-  Jeśli nie istnieje, pobiera go z Google Cloud Storage i zapisuje
+  Jeżeli nie istnieje, pobiera go z Google Cloud Storage i zapisuje
   w odpowiedniej lokalizacji w strukturze pakietu MediaPipe.
   
   Args:
@@ -38,7 +38,7 @@ def download_oss_model(model_path: str):
                 Na przykład: 'modules/face_detection/face_detection_short_range.tflite'
   
   Raises:
-    ConnectionError: Jeśli pobieranie modelu z Google Cloud Storage nie powiodło się
+    ConnectionError: Jeżeli pobieranie modelu z Google Cloud Storage nie powiodło się
                      (np. kod odpowiedzi HTTP różny od 200).
   
   Example:
@@ -49,7 +49,7 @@ def download_oss_model(model_path: str):
   mp_root_path = os.sep.join(os.path.abspath(__file__).split(os.sep)[:-4])
   model_abspath = os.path.join(mp_root_path, model_path)
   
-  # Jeśli model już istnieje, pomiń pobieranie
+  # Jeżeli model już istnieje, pomiń pobieranie
   if os.path.exists(model_abspath):
     return
   

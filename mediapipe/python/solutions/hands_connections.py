@@ -51,7 +51,7 @@ Przykład użycia:
                 image, hand_landmarks, hands_connections.HAND_CONNECTIONS)
 """
 
-# Połączenia tworzące strukturę dłoni i nadgarstka
+# Połączenia tworzące strukturę dłoni oraz nadgarstka
 HAND_PALM_CONNECTIONS = ((0, 1), (0, 5), (9, 13), (13, 17), (5, 9), (0, 17))
 
 # Połączenia stawów kciuka

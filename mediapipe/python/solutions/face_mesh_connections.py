@@ -58,7 +58,7 @@ Przykład użycia:
                 face_mesh_connections.FACEMESH_TESSELATION)
 """
 
-# Połączenia konturów ust (górna i dolna warga)
+# Połączenia konturów ust (wewnętrzne i zewnętrzne: górna i dolna warga)
 FACEMESH_LIPS = frozenset([(61, 146), (146, 91), (91, 181), (181, 84), (84, 17),
                            (17, 314), (314, 405), (405, 321), (321, 375),
                            (375, 291), (61, 185), (185, 40), (40, 39), (39, 37),
